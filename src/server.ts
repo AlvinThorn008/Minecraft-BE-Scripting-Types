@@ -2,28 +2,21 @@ import { Block, Component, Entity, LevelTickingArea, MCVector, entities, Query, 
 import { AllComponentMap, ComponentMap, components, CustomComponentMap, ServerComponentMap, serverComponents } from "./components";
 import { BroadcastEventMap, CustomEventMap, EventData, EventMap, ListenEventMap, ServerEventMap, TriggerableServerEventMap } from  './events';
 
-interface IServer {
+export interface IServer {
     registerSystem: (min: number, max: number) => ServerSystem;
     log: (message: string) => void;
-}
-
-export const server: IServer = {
-    registerSystem(min, max) {
-        return {} as ServerSystem;
-    },
-    log(message) {}
+    level: Level;
 }
 
 interface CmdCallback {
     (command: string, data: {}): void;
 }
 
-interface ServerSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
+export interface ServerSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
     [key: string]: any;
     initialize: () => void;
     shutdown: () => void;
     update: () => void;
-    level: Level;
     executeCommand(Command: string, Callback: CmdCallback): void;
     getBlock: {
         (tickingArea: LevelTickingArea, positionObject: MCVector): Block;

@@ -1,20 +1,13 @@
 import { Block, Component, Entity, LevelTickingArea, MCVector, entities, Query } from "./common";
-import {ComponentMap, components, CustomComponentMap, ClientComponentMap, clientComponents } from "./components";
+import { ComponentMap, components, CustomComponentMap, ClientComponentMap, clientComponents } from "./components";
 import { CustomEventMap, EventData, EventMap, ClientEventMap, TriggerableClientEventMap } from  './events';
 
-interface IClient {
+export interface IClient {
     registerSystem: (min: number, max: number) => ClientSystem;
     log: (message: string) => void;
 }
 
-export const client: IClient = {
-    registerSystem(min, max) {
-        return {} as ClientSystem;
-    },
-    log(message) {}
-}
-
-interface ClientSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
+export interface ClientSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
     [key: string]: any;
     initialize: () => void;
     shutdown: () => void;

@@ -1,5 +1,9 @@
-/.c.code
+/ccode
 
-/src/utils
+/utils
+
+/tests
+
+/out
 
 /node_modules

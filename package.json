@@ -5,13 +5,17 @@
   "main": "out/index.js",
   "types": "out/index.d.ts",
   "scripts": {
-    "build": "tsc --build",
-    "prepublish": "tsc --build"
+    "build": "node build.js",
+    "prepublish": "tsc --build && npm run build"
   },
   "devDependencies": {
-    "typescript": "3.4.3",
-    "dts-bundle": "^0.7.3"
+    "@microsoft/api-extractor": "7.9.22",
+    "replace-in-file": "^6.1.0",
+    "rollup": "^2.33.1",
+    "rollup-plugin-dts": "^1.4.13",
+    "typescript": "3.4.3"
   },
   "author": "Alvin Ogwu",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
