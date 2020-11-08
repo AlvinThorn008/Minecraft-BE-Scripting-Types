@@ -1,0 +1,16 @@
+{
+  "name": "mcbe-typings",
+  "version": "1.0.0",
+  "description": "Type definitions for mcbe scripting api",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "prepublish": "tsc --build"
+  },
+  "devDependencies": {
+    "typescript": "3.4.3"
+  },
+  "author": "Alvin Ogwu",
+  "license": "MIT"
+}
