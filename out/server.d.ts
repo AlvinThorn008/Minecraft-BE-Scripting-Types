@@ -10,6 +10,7 @@ interface CmdCallback {
     (command: string, data: {}): void;
 }
 interface ServerSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
+    [key: string]: any;
     initialize: () => void;
     shutdown: () => void;
     update: () => void;

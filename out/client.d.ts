@@ -7,6 +7,7 @@ interface IClient {
 }
 export declare const client: IClient;
 interface ClientSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
+    [key: string]: any;
     initialize: () => void;
     shutdown: () => void;
     update: () => void;
