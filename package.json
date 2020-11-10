@@ -4,17 +4,39 @@
   "description": "Type definitions for mcbe scripting api",
   "main": "out/index.js",
   "types": "out/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com//AlvinThorn008//MinecraftBE-Scripting-Types.git"
+  },
+  "bugs": {
+    "url": "https://github.com//AlvinThorn008//MinecraftBE-Scripting-Types//issues"
+  },
+  "homepage": "https://github.com//AlvinThorn008//MinecraftBE-Scripting-Types#readme",
   "scripts": {
-    "build": "node build.js",
-    "prepublish": "tsc --build && npm run build"
+    "build": "tsc --build && node build.js",
+    "prepare": "tsc --build && npm run build"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.9.22",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.33.1",
-    "rollup-plugin-dts": "^1.4.13",
     "typescript": "3.4.3"
   },
+  "keywords": [
+    "minecraft",
+    "types",
+    "scripting api",
+    "bedrock scripting",
+    "minecraft bedrock scripting",
+    "mcbe-typings"
+  ],
+  "files": [
+    "dist",
+    "out",
+    "src",
+    "build.js",
+    "package.json",
+    "README.md"
+  ], 
   "author": "Alvin Ogwu",
   "license": "MIT",
   "dependencies": {}

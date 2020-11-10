@@ -1,21 +1,9 @@
-import { Level } from './common';
-import { IClient, ClientSystem } from './client';
-import { IServer, ServerSystem } from './server';
+import { IClient } from './client';
+import { IServer } from './server';
 
-const client: IClient = {
-    registerSystem(min, max) {
-        return {} as ClientSystem;
-    },
-    log(message) {}
-}
+declare const client: IClient 
 
-const server: IServer = {
-    registerSystem(min, max) {
-        return {} as ServerSystem;
-    },
-    log(message) {},
-    level: {} as Level
-}
+declare const server: IServer;
 
 export { client, server };
 

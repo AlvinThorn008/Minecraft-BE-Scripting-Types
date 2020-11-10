@@ -9,9 +9,9 @@ export interface IClient {
 
 export interface ClientSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
     [key: string]: any;
-    initialize: () => void;
-    shutdown: () => void;
-    update: () => void;
+    initialize: (this: ClientSystem<C, Com>) => void;
+    shutdown: (this: ClientSystem<C, Com>) => void;
+    update: (this: ClientSystem<C, Com>) => void;
     getBlock: {
         (tickingArea: LevelTickingArea, positionObject: MCVector): Block;
         (tickingArea: LevelTickingArea, x: number, y: number, z: number): Block;
