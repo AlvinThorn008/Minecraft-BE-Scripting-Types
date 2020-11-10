@@ -24,17 +24,17 @@ callScript('api-extractor run');
 
 replaceFileData([
     {
-        files: './dist/mcbe-typings.d.ts',
+        files: './dist/mcbe-types.d.ts',
         from: /export { }/g,
         to: ''
     },
     {
-        files: './dist/mcbe-typings.d.ts',
+        files: './dist/mcbe-types.d.ts',
         from: /(\bexport \b)/g,
         to: ''
     }, 
     {
-        files: './dist/mcbe-typings.d.ts',
+        files: './dist/mcbe-types.d.ts',
         from: /(declare\sinterface)/g,
         to: 'interface'
     }
