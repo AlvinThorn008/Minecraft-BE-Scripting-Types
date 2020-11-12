@@ -98,6 +98,7 @@ interface AlienNukeActivatedEventData extends EventData {
 // An interface map of custom components
 interface MyCustomComponentMap extends ComponentMap {
 	"myaddon:alien_synergy": AlienNukeActivatedEventData;
+        // You can add more components and events using this format.
 }
 
 interface AlienSynergyComponentData extends Component {
@@ -109,6 +110,8 @@ interface AlienSynergyComponentData extends Component {
 
 // Both of the type parameters are optional, they can be excluded when ever.
 const serverSystem: ServerSystem<MyCustomEventMap, MyCustomComponentMap> = server.registerSystem(0, 0); // Yes, It looks hacky but this is how it was intended to be used.
+// Of course, you still need to register your custom events and components.
 // Now your custom components and events will show up in the intellisense for all related methods.
 ```
 
+If you need any further help, feel free to make a issue or on the (Bedrock OSS discord server)[https://discord.gg/XjV87YN]
