@@ -3,7 +3,7 @@ import { ComponentMap, components, CustomComponentMap, ServerComponentMap, serve
 import { CustomEventMap, EventData, EventMap, ServerEventMap, TriggerableServerEventMap } from  './events';
 
 export interface IServer {
-    registerSystem: (min: number, max: number) => ServerSystem;
+    registerSystem: <U extends ServerSystem>(min: number, max: number) => U;
     log: (message: string) => void;
     level: Level;
 }
@@ -14,9 +14,9 @@ interface CmdCallback {
 
 export interface ServerSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
     [key: string]: any;
-    initialize: (this: ServerSystem<C, Com>) => void;
-    shutdown: (this: ServerSystem<C, Com>) => void;
-    update: (this: ServerSystem<C, Com>) => void;
+    initialize: (this: this) => void;
+    shutdown: (this: this) => void;
+    update: (this: this) => void;
     executeCommand(Command: string, Callback: CmdCallback): void;
     getBlock: {
         (tickingArea: LevelTickingArea, positionObject: MCVector): Block;

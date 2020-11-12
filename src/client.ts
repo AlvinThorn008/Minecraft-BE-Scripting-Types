@@ -3,15 +3,15 @@ import { ComponentMap, components, CustomComponentMap, ClientComponentMap, clien
 import { CustomEventMap, EventData, EventMap, ClientEventMap, TriggerableClientEventMap } from  './events';
 
 export interface IClient {
-    registerSystem: (min: number, max: number) => ClientSystem;
+    registerSystem: <U extends ClientSystem>(min: number, max: number) => U;
     log: (message: string) => void;
 }
 
 export interface ClientSystem<C extends EventMap = CustomEventMap, Com extends ComponentMap = CustomComponentMap> {
     [key: string]: any;
-    initialize: (this: ClientSystem<C, Com>) => void;
-    shutdown: (this: ClientSystem<C, Com>) => void;
-    update: (this: ClientSystem<C, Com>) => void;
+    initialize: (this: this) => void;
+    shutdown: (this: this) => void;
+    update: (this: this) => void;
     getBlock: {
         (tickingArea: LevelTickingArea, positionObject: MCVector): Block;
         (tickingArea: LevelTickingArea, x: number, y: number, z: number): Block;
