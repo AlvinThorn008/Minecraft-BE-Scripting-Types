@@ -15,14 +15,14 @@ export interface MCAVector {
 // Scripts API Objects
 
 export interface Block {
-    __identifier__: string;
-    __type__: string;
+    readonly __identifier__: string;
+    readonly __type__: string;
     block_position: MCVector;
     ticking_area: LevelTickingArea;
 }
 
 export interface Component {
-    __type__: string;
+    readonly __type__: string;
     data: {}
 }
 
@@ -50,22 +50,22 @@ export interface ItemStack {
 }
 
 export interface Level {
-    __type__: string;
-    level_id: number;
+    readonly __type__: string;
+    readonly level_id: number;
 }
 
 export interface LevelTickingArea extends TickingArea {
-    __type__: string;
-    level_ticking_area_id: string;
+    readonly __type__: string;
+    readonly level_ticking_area_id: string;
 }
 
 export interface Query {
-    __type__: string;
-    query_id: number;
+    readonly __type__: string;
+    readonly query_id: number;
 }
 
 export interface TickingArea {
-    __type__: string;
+    readonly __type__: string;
 }
 
 // Entity Identifiers
