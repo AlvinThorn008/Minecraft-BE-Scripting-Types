@@ -3,7 +3,9 @@ import { MCVector, Entity, ItemStack, MCAVector } from './common';
 /**
  * EventData Base Interface
  */
-export interface EventData {}
+export interface EventData {
+    data: {}
+}
 
 /**
  * ServerEventData Base Interface

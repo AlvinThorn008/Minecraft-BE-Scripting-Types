@@ -14,53 +14,53 @@ export interface MCAVector {
 
 // Scripts API Objects
 
-export interface Block {
-    readonly __identifier__: string;
-    readonly __type__: string;
+export interface Block<T extends string = string> {
+    readonly __identifier__: blocks | T;
+    readonly __type__: "block";
     block_position: MCVector;
     ticking_area: LevelTickingArea;
 }
 
 export interface Component {
-    readonly __type__: string;
+    readonly __type__: "component";
     data: {}
 }
 
 export interface Entity {
     /**READ ONLY.This is the identifier for the object in the format namespace:name. For example, if the type is entity and the object is representing a vanilla cow, the identifier would be minecraft:cow */ 
-    readonly __identifier__: string;
+    readonly __identifier__: entities;
     /**READ ONLY. This defines the type of object. Can be: "entity" or "item_entity". */ 
-    readonly __type__: string;
+    readonly __type__: "item_entity" | "entity";
     /**READ ONLY. This is the unique identifier of the entity. */ 
     readonly id: number
 }
 
 export interface EntityTickingArea extends TickingArea {
-    readonly __type__: string;
+    readonly __type__: "entity_ticking_area";
     readonly entity_ticking_area_id: number;
 }
 
-export interface ItemStack {
+export interface ItemStack<T extends string = string> {
     /**READ ONLY.This is the identifier for the object in the format namespace:name. For example, if the type is entity and the object is representing a vanilla cow, the identifier would be minecraft:cow */ 
     readonly __identifier__: string;
     /**READ ONLY. This defines the type of object. Will be: "item_stack". */ 
-    readonly __type__: string;
+    readonly __type__: "item_stack";
     readonly count: string;
-    readonly item: string;
+    readonly item: items;
 }
 
 export interface Level {
-    readonly __type__: string;
+    readonly __type__: "level";
     readonly level_id: number;
 }
 
 export interface LevelTickingArea extends TickingArea {
-    readonly __type__: string;
+    readonly __type__: "level_ticking_area";
     readonly level_ticking_area_id: string;
 }
 
 export interface Query {
-    readonly __type__: string;
+    readonly __type__: "query";
     readonly query_id: number;
 }
 
