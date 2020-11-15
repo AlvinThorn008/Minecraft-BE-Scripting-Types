@@ -272,7 +272,7 @@ export type serverEvents = "minecraft:block_destruction_started" |
 
 export interface ClientEnteredWorldEventData extends ClientEventData {
     data: {
-        entity: Entity;
+        player: Entity;
     }
 }
 export interface HitResultChangedEventData extends ClientEventData {
