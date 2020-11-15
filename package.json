@@ -2,7 +2,7 @@
   "name": "ts-mcbe-scripting",
   "version": "1.0.3",
   "description": "Type definitions for Minecraft Bedrock Scripting API",
-  "main": "dist/mcbe-typings.d.ts",
+  "main": "dist/mcbe-types.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com//AlvinThorn008//Minecraft-BE-Scripting-Types.git"
