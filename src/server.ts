@@ -31,7 +31,7 @@ export interface ServerSystem<C extends EventMap = CustomEventMap, Com extends C
     applyComponentChanges(EntityObject: Entity, ComponentObject: Component): boolean;
     createComponent<T extends keyof (ServerComponentMap & Com)>(EntityObject: Entity, ComponentIdentifier: T): (ServerComponentMap & Com)[T]
     destroyComponent<T extends keyof (ServerComponentMap & Com)>(EntityObject: Entity, ComponentIdentifier: T): boolean;
-    getComponent<T extends keyof (ServerComponentMap & Com)>(EntityObject: Entity, ComponentIdentifier: T): (ServerComponentMap & Com)[T];
+    getComponent<T extends keyof (ServerComponentMap & Com)>(EntityObject: Entity | Level, ComponentIdentifier: T): (ServerComponentMap & Com)[T];
     hasComponent<T extends keyof (ServerComponentMap & Com)>(EntityObject: Entity, ComponentIdentifier: T): boolean; // make component literal types
     registerComponent(ComponentIdentifier: string, ComponentData: Component): boolean; // ADD ComponentData interface
 
