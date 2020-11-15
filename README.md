@@ -60,14 +60,38 @@ As of now, this repo targets Minecraft v1.16.20.3[Latest].
 ```
  6. Assuming it's client.ts
 ```typescript
-    /// <reference path="../../../node_modules/dist/mcbe-types.d.ts" />
-    const clientSystem = client.registerSystem(0, 0);
-    clientSystem.initialize = function() {}
-    
-    clientSystem.update = function() {}
+/// <reference path="../../../node_modules/dist/mcbe-types.d.ts" />
+const clientSystem = client.registerSystem(0, 0);
+clientSystem.initialize = function() {}
+
+clientSystem.update = function() {}
 ```
 Code hints from your IDE or editor should pop up as you type.
 After all of that, simply run in the shell, `npx tsc --build` to build/compile your project.
+
+NOTE: `mcbe-types.d.ts` is located in the `dist` folder of the package in the `node_modules` folder.
+
+REF: `node_modules > dist > mcbe-types.d.ts`
+
+### Basic Usage
+After installing the package.
+```typescript
+/// <reference path="path/to/typings/in/packages/dist/folder" />
+const serverSystem = server.registerSystem(0, 0);
+serverSystem.initialize = function() {
+    this.listenForEvent("minecraft:entity_death", this.onEntityDeath();
+}
+
+serverSystem.update = function() {};
+
+serverSystem.onEntityDeath = function(e: EntityDeathEventData) {
+    if (e.data.entity.__identifier__ == "minecraft:cow") {
+        this.executeCommand(`/tellraw @a {"text": "A cow was slaughtered in a cold blood.", "color": "red"}`, (e) => {});
+    }
+}
+```
+
+NOTE: Due to the natural of the standard scripting conventions like the one above, new methods on the `ServerSystem` or `ClientSystem` will not show up in intelli-sense(code hints). Please see aspects for how to tackle this.
 
 ### Aspects
 
@@ -77,6 +101,77 @@ When using the system's event and component binding methods, you'll receive a go
 serverSystem.listenForEvent("minecraft:entity_death", (e) => {});
 // The type of the parameter `e` will be the `EntityDeathEventData` interface.
 ```
+
+#### Extending the system
+If you need that extra level of type safety in your `ClientSystem` or `ServerSystem`. You can extend the them and add on new methods.
+
+```typescript
+interface MyClientSystem extends ClientSystem {
+    sendMessage(this: this, message: string): void; // this parameter should be defined so you can use this in the sendMessage method.
+}
+
+const clientSystem = client.registerSystem<MyClientSystem>(0, 0);
+
+clientSystem.sendMessage = function(message) {
+    // Creating event data.
+    let messageEventData = this.createEventData("minecraft:display_chat_event");
+
+    messageEventData.data.message = message;
+
+    // Broadcasting the event.
+    this.broadcastEvent("minecraft:display_chat_event", messageEventData);
+}
+```
+
+A more complicated example combining the custom events with interface extension.
+```typescript
+// An interface map of custom events
+interface MyCustomEventMap extends EventMap {
+	"myaddon:alien_nuke_activated": AlienNukeActivatedEventData;
+}
+
+interface AlienNukeActivatedEventData extends EventData {
+	data: {
+		nuke_position: MCVector;
+		activated_by: string;
+	}
+}
+
+// An interface map of custom components
+interface MyCustomComponentMap extends ComponentMap {
+	"myaddon:alien_synergy": AlienNukeActivatedEventData;
+        // You can add more components and events using this format.
+}
+
+interface AlienSynergyComponentData extends Component {
+	data: {
+		synergy_radius: number;
+		synergy_filter: MCFilter; // This belongs to the type library.
+	}
+}
+
+interface MyClientSystem<C extends EventMap = EventMap, Com extends ComponentMap = ComponentMap> extends ClientSystem {
+    sendMessage(this: this, message: string): void; // this parameter should be defined so you can use this in the sendMessage method.
+}
+
+const clientSystem = client.registerSystem<MyClientSystem<MyCustomEventMap, MyCustomComponentMap>>(0, 0);
+// or const clientSystem: MyClientSystem<MyCustomEventMap, MyCustomComponentMap>  = client.registerSystem(0, 0);
+
+clientSystem.sendMessage = function(message) {
+    // Creating event data.
+    let messageEventData = this.createEventData("minecraft:display_chat_event");
+
+    messageEventData.data.message = message;
+
+    // Broadcasting the event.
+    this.broadcastEvent("minecraft:display_chat_event", messageEventData);
+}
+```
+
+#### Assertions
+Due to the structure of the library, some features will unfortunately only be accessible through 'hacky' measures.
+Most system methods require and or return Script API objects. In the event that custom entities, blocks, particles etc are used, typescript will not recognize them. To make them work, you can assert your custom entities, blocks, particles etc as part of the vanilla values. 
+...More coming soon.
 
 #### Custom Components and Events
 Rather than passing a type parameter into component and event binding methods, The types are written in a way that a map of component identifiers or event identifiers to Component data or Event data is passed into the `ClientSystem` or `ServerSystem` Object.
