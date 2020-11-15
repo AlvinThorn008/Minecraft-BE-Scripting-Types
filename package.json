@@ -13,7 +13,7 @@
   "homepage": "https://github.com//AlvinThorn008//Minecraft-BE-Scripting-Types#readme",
   "scripts": {
     "build": "tsc --build && node build.js",
-    "prepare": "tsc --build && npm run build"
+    "prepare": "npm run build"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "7.9.22",
