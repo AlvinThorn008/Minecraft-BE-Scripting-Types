@@ -1,12 +1,14 @@
 // Vector
 
 export interface MCVector {
+    [key: string]: number;
     x: number;
     y: number;
     z: number;
 }
 
 export interface MCAVector {
+    [key: number]: number;
     0: number;
     1: number;
     2: number;
@@ -14,8 +16,8 @@ export interface MCAVector {
 
 // Scripts API Objects
 
-export interface Block<T extends string = string> {
-    readonly __identifier__: blocks | T;
+export interface Block {
+    readonly __identifier__: blocks;
     readonly __type__: "block";
     block_position: MCVector;
     ticking_area: LevelTickingArea;

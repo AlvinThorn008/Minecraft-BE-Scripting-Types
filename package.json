@@ -1,6 +1,6 @@
 {
   "name": "ts-mcbe-scripting",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Type definitions for Minecraft Bedrock Scripting API",
   "main": "dist/mcbe-typings.d.ts",
   "repository": {
@@ -26,7 +26,8 @@
     "scripting api",
     "bedrock scripting",
     "minecraft bedrock scripting",
-    "mcbe-typings"
+    "mcbe-typings",
+    "ts-mcbe-scripting"
   ],
   "files": [
     "dist",
