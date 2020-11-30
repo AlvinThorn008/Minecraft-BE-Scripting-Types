@@ -170,9 +170,24 @@ clientSystem.sendMessage = function(message) {
 
 #### Assertions
 Due to the structure of the library, some features will unfortunately only be accessible through 'hacky' measures.
-Most system methods require and or return Script API objects. In the event that custom entities, blocks, particles etc are used, typescript will not recognize them. To make them work, you can assert your custom entities, blocks, particles etc as part of the vanilla values. 
-...More coming soon.
+Most system methods require and or return Script API objects. In the event that custom entities, blocks, particles etc are used, typescript will not recognize them. To make them work, you can assert your custom entities, blocks, and items etc as part of the vanilla values
 
+##### Example
+```typescript
+// Bad example but still a case assertions can solved.
+serverSystem.checkCustomEntity = function() {
+    let g = this.createEntity('entity', "tsapidoc:lorem_entity" as entities);
+    if (g.__identifier__ == "tsapidoc:lorem_entity" as entities) { // `tsapidoc:lorem_entity` will not show up in intellisense/code hints for g.__identifier.
+        this.broadcastEvent("minecraft:display_chat_event", {
+            data: {
+                message: "This part works"
+            }
+        })
+    }
+}
+```
+This can be done for `<blocks>`, `<entities>`, and `<items>`. 
+NOTE: These assertions don't allow for extra type safety, they are simply a way to move away from the limitations are the library.****
 #### Custom Components and Events
 Rather than passing a type parameter into component and event binding methods, The types are written in a way that a map of component identifiers or event identifiers to Component data or Event data is passed into the `ClientSystem` or `ServerSystem` Object.
 
@@ -208,5 +223,8 @@ const serverSystem: ServerSystem<MyCustomEventMap, MyCustomComponentMap> = serve
 // Of course, you still need to register your custom events and components.
 // Now your custom components and events will show up in the intellisense for all related methods.
 ```
+I understand that this is extremely verbose but within the limits of my knowledge, this was a good way to improve the allowance of type safety. 
 
-If you need any further help, feel free to make a issue or on the (Bedrock OSS discord server)[https://discord.gg/XjV87YN]
+
+If you need any further help and or experiencing issues, feel free to make a issue.
+**Pull requests are most welcome**
