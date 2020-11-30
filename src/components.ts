@@ -8,7 +8,7 @@ export type clientComponents = "minecraft:molang";
 
 export type levelComponents = "minecraft:ticking_areas" | "minecraft:weather";
 
-export type serverComponents = "minecraft:armor_container" | "minecraft:attack" | "minecraft:collision_box" | "minecraft:container" | "minecraft:damage_sensor" | "minecraft:equipment" | "minecraft:equippable" | "minecraft:explode" | "minecraft:hand_container" | "minecraft:healable" | "minecraft:health" | "minecraft:hotbar_container" | "minecraft:interact" | "minecraft:inventory" | "minecraft:inventory_container" | "minecraft:lookat" | "minecraft:nameable" | "minecraft:position" | "minecraft:rotation" | "minecraft:shooter" | "minecraft:spawn_entity" | "minecraft:tag" | "minecraft:teleport" | "minecraft:tick_world" | "minecraft:ticking_area_description";
+export type serverComponents = "minecraft:armor_container" | "minecraft:attack" | "minecraft:collision_box" | "minecraft:container" | "minecraft:damage_sensor" | "minecraft:equipment" | "minecraft:equippable" | "minecraft:explode" | "minecraft:hand_container" | "minecraft:healable" | "minecraft:health" | "minecraft:hotbar_container" | "minecraft:interact" | "minecraft:inventory" | "minecraft:inventory_container" | "minecraft:lookat" | "minecraft:nameable" | "minecraft:position" | "minecraft:rotation" | "minecraft:shooter" | "minecraft:spawn_entity" | "minecraft:tag" | "minecraft:teleport" | "minecraft:tick_world" | "minecraft:ticking_area_description" | "minecraft:transformation";
 
 export interface ClientComponent extends Component {
     data: {}
@@ -288,6 +288,27 @@ export interface TickingAreaDescriptionComponent extends ServerComponent {
     }
 }
 
+export interface TransformationComponent extends ServerComponent {
+    data: {
+        add: {
+            "component_groups": []
+        };
+        begin_transform_sound: string;
+        delay: {
+            "block_assist_chance": number;
+            "block_chance": number,
+            "block_max": number,
+            "block_radius": number,
+            "block_types": []
+            "keep_owner": boolean,
+            "value": number
+        };
+        drop_equipment: boolean;
+        into: string;
+        transformation_sound: string;
+    }
+}
+
 export interface CustomComponentMap extends ComponentMap{}
 
 export interface ClientComponentMap extends ComponentMap {
@@ -324,38 +345,14 @@ export interface ServerComponentMap extends ComponentMap {
     "minecraft:teleport": TeleportComponent
     "minecraft:tick_world": TickWorldComponent;
     "minecraft:ticking_area_description": TickingAreaDescriptionComponent
+    "minecraft:transformation": TransformationComponent
+}
+
+export interface ScriptComponentMap extends ComponentMap {
+    "minecraft:ticking_areas": TickingAreasComponent;
+    "minecraft:weather": WeatherComponent
 }
 
 export interface ComponentMap {}
 
-export interface AllComponentMap extends ComponentMap {
-    "minecraft:blockstate": BlockStateComponent;
-    "minecraft:molang": MolangComponent;
-    "minecraft:ticking_areas": TickingAreasComponent;
-    "minecraft:weather": WeatherComponent;
-    "minecraft:armor_container": ArmorContainerComponent;
-    "minecraft:attack": AttackComponent;
-    "minecraft:collision_box": CollisionBoxComponent;
-    "minecraft:container": ContainerComponent;
-    "minecraft:damage_sensor": DamageSensorComponent;
-    "minecraft:equipment": EquipmentComponent;
-    "minecraft:equippable": EquippableComponent
-    "minecraft:explode": ExplodeComponent;
-    "minecraft:hand_container": HandContainerComponent
-    "minecraft:healable": HealableComponent;
-    "minecraft:health": HealthComponent;
-    "minecraft:hotbar_container": HotbarContainerComponent;
-    "minecraft:interact": InteractComponent;
-    "minecraft:inventory": InventoryComponent
-    "minecraft:inventory_container": InventoryContainerComponent
-    "minecraft:lookat": LookatComponent;
-    "minecraft:nameable": NameableComponent
-    "minecraft:position": PositionComponent;
-    "minecraft:rotation": RotationComponent
-    "minecraft:shooter": ShooterComponent;
-    "minecraft:spawn_entity": SpawnEntityComponent
-    "minecraft:tag": TagComponent;
-    "minecraft:teleport": TeleportComponent
-    "minecraft:tick_world": TickWorldComponent;
-    "minecraft:ticking_area_description": TickingAreaDescriptionComponent
-}
+export type AllComponentMap = ServerComponentMap & ClientComponentMap & ScriptComponentMap

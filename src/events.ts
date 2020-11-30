@@ -148,6 +148,12 @@ export interface EntityHurtEventData extends ServerEventData {
     }
 }
 
+export interface EntityMoveEventData extends ServerEventData {
+    data: {
+        entity: Entity
+    }
+}
+
 export interface EntitySneakEventData extends ServerEventData {
     data: {
         entity: Entity;
@@ -257,6 +263,7 @@ export type serverEvents = "minecraft:block_destruction_started" |
 "minecraft:entity_dropped_item" |
 "minecraft:entity_equipped_armor" |
 "minecraft:entity_hurt" |
+"minecraft:entity_move" |
 "minecraft:entity_sneak" |
 "minecraft:entity_start_riding" |
 "minecraft:entity_stop_riding" |
@@ -431,6 +438,7 @@ export interface ServerEventMap extends EventMap {
     "minecraft:entity_dropped_item": EntityDroppedItemEventData;
     "minecraft:entity_equipped_armor": EntityEquippedArmorEventData;
     "minecraft:entity_hurt": EntityHurtEventData;
+    "minecraft:entity_move": EntityMoveEventData;
     "minecraft:entity_sneak": EntitySneakEventData;
     "minecraft:entity_start_riding": EntityStartRidingEventData;
     "minecraft:entity_stop_riding": EntityStopRidingEventData;
