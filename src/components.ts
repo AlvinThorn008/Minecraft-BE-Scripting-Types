@@ -29,7 +29,9 @@ export interface BlockStateComponent extends Component {
 // Client Components
 
 export interface MolangComponent extends ClientComponent {
-    [key: string]: any;
+    data: {
+        [key: string]: any;
+    }
 }
 
 // Level Components
