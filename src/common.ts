@@ -16,6 +16,8 @@ export interface MCVector {
  */
 export type MCAVector = [number, number, number];
 
+export type ThreeDimensionalBlockArray = Block[][][];
+
 // Scripts API Objects
 
 export interface Block {

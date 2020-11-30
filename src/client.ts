@@ -1,4 +1,4 @@
-import { Block, Component, Entity, LevelTickingArea, MCVector, entities, Query } from "./common";
+import { Block, Component, Entity, LevelTickingArea, MCVector, entities, Query, ThreeDimensionalBlockArray } from "./common";
 import { ComponentMap, components, CustomComponentMap, ClientComponentMap, clientComponents } from "./components";
 import { CustomEventMap, EventData, EventMap, ClientEventMap, TriggerableClientEventMap } from  './events';
 
@@ -18,8 +18,8 @@ export interface ClientSystem<C extends EventMap = CustomEventMap, Com extends C
     }
 
     getBlocks: {
-        (tickingArea: LevelTickingArea, xMin: number, yMin: number, zMin: number, xMax: number, yMax: number, zMax: number): Array<Block>;
-        (tickingArea: LevelTickingArea, minPositionObject: MCVector, maxPositionObject: MCVector): Array<Block>;
+        (tickingArea: LevelTickingArea, xMin: number, yMin: number, zMin: number, xMax: number, yMax: number, zMax: number): ThreeDimensionalBlockArray;
+        (tickingArea: LevelTickingArea, minPositionObject: MCVector, maxPositionObject: MCVector): ThreeDimensionalBlockArray;
     }
     // Component Bindings
     applyComponentChanges(EntityObject: Entity, ComponentObject: Component): boolean;
